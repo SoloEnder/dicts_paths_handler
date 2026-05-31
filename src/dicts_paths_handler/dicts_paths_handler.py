@@ -1,6 +1,6 @@
 
 from .exceptions import InvalidDictPathError
-class DictPathHandler():
+class DictsPathsHandler():
 
     def __init__(self, base_dict: dict|None=None):
         self.base_dict = base_dict if base_dict else {}
