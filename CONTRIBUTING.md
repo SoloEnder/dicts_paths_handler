@@ -3,13 +3,13 @@
 Even though dicts_paths_handler is a small project, any valuable contribution is welcome.
 
 ## ISSUES
-Having trouble using this package ? Report them [*here*](https://github.com/SoloEnder/dicts_paths_handler/issues). 
+Having trouble using this package ? Report them [*here*](https://github.com/SoloEnder/dicts_paths_handler/issues). You can also uses this link for feature requests
 
-To help us understand your problem more quickly, we recommend explaining it according to the following guidelines:
-
-- Provide a clear title.
-- Include a clear description of your problem, its context, and examples (such as screenshots).
+To help us understand your problem more quickly, we recommend explaining it according to the issues templates.
+Before submitting your issue, please check if it has already been listed.
+We will do our best to respond to or resolve your issue as quickly as possible.
 
 ## PULL REQUESTS
-You have an feature/fix/documentation idea and want to add its code to this package ? Open a pull request !
+You want to add you're change to the project ? Open a pull request !
+Pull requests should follow the format defined in `pull_request_template.md`
 
