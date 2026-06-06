@@ -44,4 +44,7 @@ An `InvalidDictPathError` exception will be raised if the dict path is not found
 ## How does it work ?
 Each key of the dict is a part of the dict path, in the normal order of python dict keys : keyA.keyAA.keyAAA.
 
-
+## Infos
+This project is developed by [**SoloEnder**](https://github.com/SoloEnder)
+- [**Home page**](https://github.com/SoloEnder/dicts_paths_handler)
+- [**Issues page**](https://github.com/SoloEnder/dicts_paths_handler/issues)
