@@ -3,6 +3,7 @@
 
 ### docs
 - added link to the Home page and the issues of the project in the README
+- updated the pull request template
 
 ### feature
 - added the `create_entry` method to the `DictsPathsHandler` for adding a new pair of `key:value` to the `base_dict`.
