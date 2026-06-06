@@ -101,3 +101,15 @@ class DictsPathsHandler():
         else:
             raise NotADictError(parent_dict_path)
         
+    def delete_entry(self, dict_path: str):
+        sections = dict_path.split(".")
+        parent_dict_path = ".".join(sections[:-1])
+        to_delete = dict_path.split(".")[-1]
+        
+        parent_value = self.get_value(parent_dict_path)
+        del parent_value[to_delete]
+        self.edit_value(parent_dict_path, parent_value)
+        
+        
+        
+        
