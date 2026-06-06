@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dicts_paths_handler"
-version = "1.0.1"
+version = "1.2.0"
 authors = [
   { name="SoloEnder", email="SoloEnder@proton.me" },
 ]

@@ -1,5 +1,6 @@
 
-from .exceptions import InvalidDictPathError
+from .exceptions import InvalidDictPathError, NotADictError
+
 class DictsPathsHandler():
 
     def __init__(self, base_dict: dict|None=None):
@@ -68,4 +69,47 @@ class DictsPathsHandler():
 
         except KeyError:
             raise InvalidDictPathError(dict_path)
+        
+    def create_entry(self, parent_dict_path: str, name: str, value) -> str:
+        """
+        Creates a new entry and add it as a 'key':'value' to the base dict
+        
+        Parameters
+        ----------
+        parent_dict_path (str): the dict_path of the parent of the new entry
+        name (str): the name of the new entry (used as a dict key)
+        value: the value of the new entry (used as a dict value)
+        
+        Returns
+        -------
+        str: the dict_path of the new entry
+        
+        Raises
+        ------
+        NotADictError: exception triggered when the value of 'parent_dict_path' is not a dictionnary, unabling the addition
+        """
+        
+        
+        parent_dict = self.get_value(parent_dict_path)
+        full_path = f"{parent_dict_path}.{name}"
+        
+        if isinstance(parent_dict, dict):
+            parent_dict[name] = value
+            self.edit_value(parent_dict_path, parent_dict)
+            return full_path
+        
+        else:
+            raise NotADictError(parent_dict_path)
+        
+    def delete_entry(self, dict_path: str):
+        sections = dict_path.split(".")
+        parent_dict_path = ".".join(sections[:-1])
+        to_delete = dict_path.split(".")[-1]
+        
+        parent_value = self.get_value(parent_dict_path)
+        del parent_value[to_delete]
+        self.edit_value(parent_dict_path, parent_value)
+        
+        
+        
         
