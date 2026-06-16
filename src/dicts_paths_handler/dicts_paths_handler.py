@@ -24,7 +24,7 @@ class DictsPathsHandler:
         InvalidDcitPathError: if 'dict_path' isn't a valid dict_path
         """
 
-        if dict_path == ".":
+        if dict_path == "":
             return self.base_dict
 
         path_sections = dict_path.split(".")
@@ -111,3 +111,89 @@ class DictsPathsHandler:
         parent_value = self.get_value(parent_dict_path)
         del parent_value[to_delete]
         self.edit_value(parent_dict_path, parent_value)
+
+    def get_all_dicts_paths(self, base_path: str) -> list[str] | list:
+        """
+        Walk trough the values of a dict_path and return their dict_path
+
+        Parameters
+        ----------
+        `base_path(str)`: the base dict path where the walk start
+
+        Returns
+        -------
+        list: a list containing all the dicts_paths found
+
+        Note
+        ----
+        If `initial_path` is equal to "", then "" will be in the returned list
+        """
+
+        current_path = base_path
+        cheched_paths = []
+        all_dicts_paths = self._walk(current_path, cheched_paths, current_path)
+
+        if all_dicts_paths is None:
+            all_dicts_paths = []
+
+        return all_dicts_paths
+
+    def _walk(
+        self, current_path: str, checked_paths: list, initial_path: str
+    ) -> list[str]:
+        """
+        Walk trough the values of a dict_path and return their dict_path
+
+        Parameters
+        ----------
+        `current_path(str)`: The currently traversed path.
+        `checked_path(list)`: The paths already traversed by the method; must initially be an empty list.
+        `initial_path(str)`: The first path traversed by the function (normally equal to `current_path` when this function is called).
+
+        Returns
+        -------
+        list: a list containing all the dicts_paths found
+
+        Note
+        ----
+        If `initial_path` is equal to "", then "" will be in the returned list
+        """
+        content = self.get_value(current_path)
+
+        if isinstance(content, dict):
+            for key in content:
+                potential_path = current_path + "." + key
+
+                if potential_path.startswith("."):
+                    potential_path = potential_path.replace(".", "", 1)
+
+                if potential_path not in checked_paths:
+                    print(f"- Found one untested path ({potential_path}) rewalking")
+                    current_path = potential_path
+                    return self._walk(current_path, checked_paths, initial_path)
+
+            else:
+                old_current_path = current_path
+                checked_paths.append(current_path)
+                current_path = ".".join(current_path.split(".")[:-1])
+
+                if current_path:
+                    if not current_path == initial_path:
+                        return self._walk(current_path, checked_paths, initial_path)
+
+                    else:
+                        return checked_paths
+
+                else:
+                    if old_current_path in self.base_dict.keys():
+                        print(f"{old_current_path=}")
+                        return self._walk("", checked_paths, initial_path)
+
+                    else:
+                        return checked_paths
+
+        else:
+            checked_paths.append(current_path)
+            current_path_splited = current_path.split(".")
+            current_path = ".".join(current_path_splited[:-1])
+            return self._walk(current_path, checked_paths, initial_path)
