@@ -1,4 +1,11 @@
 
+
+## v1.3.0 (16/06/2026)
+
+### feature
+- calling `get_value` method with "" as `dict_path` now return the value of `base_dict` attribute
+- added `get_all_dicts_path` method which returned all the dict_path presents in a dict_path
+- 
 ## v1.2.0 (06/06/2026)
 
 ### docs
